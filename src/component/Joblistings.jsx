@@ -8,8 +8,9 @@ const Joblistings = ({showAll = false}) => {
 
   useEffect(()=>{
     const FetchJobs = async() => {
+      const API = showAll ?  '/api/jobs' : '/api/jobs?_limit=3'
       try {
-        const res = await fetch('http://localhost:4000/jobs');
+        const res = await fetch(API);
         const data = await res.json()
         setJobs(data) 
       } catch (err) {
@@ -21,9 +22,6 @@ const Joblistings = ({showAll = false}) => {
 
     FetchJobs()
   }, [])
-
-
-   const Jobs = showAll ?  jobs : jobs.slice(0,3)
   return (
     <div>
     <section className="bg-blue-50 px-4 py-10">
@@ -34,7 +32,7 @@ const Joblistings = ({showAll = false}) => {
           {loading ? (<Spinner loading={loading}/>
           ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {Jobs.map((job)=>(
+            {jobs.map((job)=>(
              <Joblisting key={job.id} job = {job}/>
             ))}
           </div>
