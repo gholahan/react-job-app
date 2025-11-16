@@ -7,6 +7,7 @@ import JobsPage from './Pages/JobsPage'
 import NotFoundPage from './Pages/NotFoundPage'
 import JobPage from './Pages/Jobpage'
 import {jobLoader} from './Loaders/loader'
+import AddJobPage from './Pages/AddJobPage'
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
      <Route index element={<HomePage/>}/>
      <Route path= "/jobs" element={<JobsPage/>}/>
      <Route path= "/jobs/:id" element={<JobPage/>} loader= {jobLoader}/>
+     <Route path= "/add-job" element={<AddJobPage/>} />
      <Route path= "*" element={<NotFoundPage/>}/>    
    </Route>
   )) 
