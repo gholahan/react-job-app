@@ -1,5 +1,5 @@
 import { useLoaderData, Link} from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft,FaLocationArrow } from 'react-icons/fa';
 const JobPage = () => {
   
   const job = useLoaderData()
@@ -7,12 +7,12 @@ const JobPage = () => {
     <>
     <section>
       <div className="container m-auto py-6 px-6">
-        <a
+        <Link
           to="/jobs"
           className="text-indigo-500 hover:text-indigo-600 flex items-center"
         >
           <FaArrowLeft className='mr-2'/> Back to Job Listings
-        </a>
+        </Link>
       </div>
     </section>
 
@@ -30,9 +30,7 @@ const JobPage = () => {
               <div
                 className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
               >
-                <i
-                  className="fa-solid fa-location-dot text-lg text-orange-700 mr-2"
-                ></i>
+               <FaLocationArrow className='text-lg text-orange-700 mr-2'/>
                 <p className="text-orange-700">{job.loaction}</p>
               </div>
             </div>
