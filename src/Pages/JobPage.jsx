@@ -1,8 +1,18 @@
-import { useLoaderData, Link} from 'react-router-dom';
-import { FaArrowLeft,FaLocationArrow } from 'react-icons/fa';
-const JobPage = () => {
+import {useLoaderData, Link, useNavigate} from 'react-router-dom';
+import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
+const JobPage = ({deleteJob}) => {
   
-  const job = useLoaderData()
+  const job = useLoaderData() 
+  const navigate =useNavigate() 
+
+  const onDeleteClick = (jobId)=>{
+    const confirm = window.confirm("Are you sure you're deleteing")
+
+    if(!confirm) return
+
+    deleteJob(jobId)
+    navigate('/jobs')
+  }
   return (
     <>
     <section>
@@ -19,7 +29,7 @@ const JobPage = () => {
     <section className="bg-indigo-50">
       <div className="container m-auto py-10 px-6">
         <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6">
-          <main>
+           <main>
             <div
               className="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
             >
@@ -30,7 +40,7 @@ const JobPage = () => {
               <div
                 className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
               >
-               <FaLocationArrow className='text-lg text-orange-700 mr-2'/>
+               <FaMapMarker className='text-lg text-orange-700 mr-2'/>
                 <p className="text-orange-700">{job.loaction}</p>
               </div>
             </div>
@@ -83,6 +93,7 @@ const JobPage = () => {
                 >Edit Job
               </Link>
               <button
+              onClick={()=> onDeleteClick(job.id)}
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
                 Delete Job

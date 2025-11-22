@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './component/navbar'
 import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider,} from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import MainLayout from './Layout/MainLayout'
@@ -14,6 +13,7 @@ import AddJobPage from './Pages/AddJobPage'
 const App = () => {
 
 const submitJob = async (jobData) => {
+  //add new job
   const res = await fetch('/api/jobs', {
     method: 'POST',
     headers: {
@@ -24,11 +24,20 @@ const submitJob = async (jobData) => {
    return;
 }
 
+
+// delete a job
+const deleteJob = async (jobId) => {
+  const res = await fetch(`/api/jobs/${jobId}`, {
+    method: 'DELETE',   
+   })
+   return;
+}
+
   const router = createBrowserRouter(createRoutesFromElements(
    <Route path='/' element={<MainLayout/>}>
      <Route index element={<HomePage/>}/>
      <Route path= "/jobs" element={<JobsPage/>}/>
-     <Route path= "/jobs/:id" element={<JobPage/>} loader= {jobLoader}/>
+     <Route path= "/jobs/:id" element={<JobPage deleteJob = {deleteJob}/>} loader= {jobLoader}/>
      <Route path= "/add-job" element={<AddJobPage addJobSubmit = {submitJob}/>} />
      <Route path= "*" element={<NotFoundPage/>}/>    
    </Route>
